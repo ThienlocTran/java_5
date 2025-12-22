@@ -1,13 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
 </head>
 <body>
-<form>
-    <input type="text" name="" id="" placeholder="Nhap ten di">
+<form action="/login/check" method="post">
+    <input type="text" name="username" id="username" required placeholder="Nhap ten di">
+    <input type="password" name="password" id="password" required>
+    <button type="submit">Đăng nhập</button>
 </form>
+
+<div th:if="${message}" th:class="${'message' + messageType}">
+    <span th:text="${message}"></span>
+
+</div>
 </body>
 </html>
