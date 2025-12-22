@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hình Chữ Nhật</title>
+</head>
+<body>
+    <h1>Tính Chu Vi và Diện Tích Hình Chữ Nhật</h1>
+    
+    <form action="/match/check" method="post">
+        <label>Chiều dài:</label>
+        <input type="text" name="length" required>
+        <br><br>
+        
+        <label>Chiều rộng:</label>
+        <input type="text" name="width" required>
+        <br><br>
+        
+        <button type="submit">Tính toán</button>
+    </form>
+    
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+    
+    <div th:if="${perimeter != null}">
+        <h2>Kết quả:</h2>
+        <p>Chu vi: <span th:text="${perimeter}"></span></p>
+        <p>Diện tích: <span th:text="${area}"></span></p>
+    </div>
+</body>
+</html>
