@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<form action="/param/save/2021" method="post">
+    <input name="y" value="2031">
+    <button>Save</button>
+</form>
+
+<ul>
+    <li th:text="'?x = ' + ${x}">?x</li>
+    <li th:text="'?y = ' + ${y}">?y</li>
+</ul>
+</body>
+</html>
