@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<form action="/product/save" method="post">
+    <label for="name">Nhập tên</label>
+    <input type="text" name="name" >
+    <label for="price">Nhập giá tiền</label>
+    <input type="number" name="price" >
+    <button>Save</button>
+</form>
+<ul>
+    <li th:text="'name = ' + ${name}">name</li>
+    <li th:text="'price = ' + ${price}">price</li>
+</ul>
+</body>
+</html>
