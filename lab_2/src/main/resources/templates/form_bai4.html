@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Form</title>
+</head>
+<body>
+    <form action="/product/save_bai4" method="post">
+        <input name="name" th:value="${product.name}">
+        <input name="price" th:value="${product.price}">
+        <button>Save</button>
+    </form>
+    
+    <ul>
+        <li th:text="'name = ' + ${product.name}">?name</li>
+        <li th:text="'price = ' + ${product.price}">?price</li>
+    </ul>
+    
+    <ul>
+        <th:block th:each="item : ${items}">
+            <li th:text="${item.name}"></li>
+            <li th:text="${item.price}"></li>
+        </th:block>
+    </ul>
+</body>
+</html>
