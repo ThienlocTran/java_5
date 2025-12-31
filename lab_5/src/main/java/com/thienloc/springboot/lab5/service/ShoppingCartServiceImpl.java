@@ -1,5 +1,6 @@
 package com.thienloc.springboot.lab5.service;
 
+import com.thienloc.springboot.lab5.entity.DB;
 import com.thienloc.springboot.lab5.entity.Item;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -13,20 +14,10 @@ import java.util.Map;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     Map<Integer, Item> map = new HashMap<>();
     
-    // Dữ liệu mẫu sản phẩm (thực tế nên lấy từ database)
-    private Item[] items = {
-        new Item(1, "iPhone 15", 25000000, 1),
-        new Item(2, "Samsung Galaxy S24", 22000000, 1),
-        new Item(3, "MacBook Pro", 45000000, 1),
-        new Item(4, "Dell XPS 13", 35000000, 1),
-        new Item(5, "AirPods Pro", 6000000, 1)
-    };
-    
     private Item findById(Integer id) {
-        for (Item item : items) {
-            if (item.getId().equals(id)) {
-                return new Item(item.getId(), item.getName(), item.getPrice(), 1);
-            }
+        Item item = DB.items.get(id);
+        if (item != null) {
+            return new Item(item.getId(), item.getName(), item.getPrice(), 1);
         }
         return null;
     }

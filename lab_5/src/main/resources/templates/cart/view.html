@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng</title>
@@ -8,7 +8,7 @@
     <h2>Giỏ hàng của bạn</h2>
     
     <div th:if="${count > 0}">
-        <table border="1">
+        <table border="1" >
             <tr>
                 <th>ID</th>
                 <th>Tên sản phẩm</th>
@@ -24,7 +24,9 @@
                 <td>
                     <form action="/cart/update" method="post" style="display: inline;">
                         <input type="hidden" name="id" th:value="${item.id}">
-                        <input type="number" name="qty" th:value="${item.qty}" min="0" style="width: 60px;">
+                        <label>
+                            <input type="number" name="qty" th:value="${item.qty}" min="0" style="width: 60px;">
+                        </label>
                         <button type="submit">Cập nhật</button>
                     </form>
                 </td>
