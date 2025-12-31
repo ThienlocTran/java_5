@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<header><h1 th:text="#{header.name}">Shopping</h1></header>
+
+<footer>
+    <hr>
+    <th:block   th:utext="#{footer.copy}">
+        &copy; 2025 by Tran Thien Loc. All rights reserved.
+    </th:block>
+</footer>
+</body>
+</html>
