@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<div class="all-classes-container" style="text-align: center">
+    <table  style="height: auto; width: 80%; margin-left: 200px;margin-top: 200px;">
+        <thead>
+        <tr>
+            <th rowspan="2">Họ và tên</th>
+            <th colspan="6">Các thuộc tính khác</th>
+        </tr>
+        <tr>
+            <th>Index</th>
+            <th>Count</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Odd</th>
+            <th>Even</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="staff,st : ${list}">
+            <tr th:style="@{|background-color:${st.odd? 'pink' :'orange'}|}">
+                <td th:text="${#strings.capitalizeWords(staff.name)}"></td>
+                <td th:text="${st.index}"></td>
+                <td th:text="${st.count}"></td>
+                <td th:text="${st.first}"></td>
+                <td th:text="${st.last}"></td>
+                <td th:text="${st.odd}"></td>
+                <td th:text="${st.even}"></td>
+
+
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
