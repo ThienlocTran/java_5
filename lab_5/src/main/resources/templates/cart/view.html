@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+</head>
+<body>
+    <h2>Giỏ hàng của bạn</h2>
+    
+    <div th:if="${count > 0}">
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Thao tác</th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                <td>
+                    <form action="/cart/update" method="post" style="display: inline;">
+                        <input type="hidden" name="id" th:value="${item.id}">
+                        <input type="number" name="qty" th:value="${item.qty}" min="0" style="width: 60px;">
+                        <button type="submit">Cập nhật</button>
+                    </form>
+                </td>
+                <td th:text="${#numbers.formatDecimal(item.price * item.qty, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                <td>
+                    <a th:href="@{/cart/remove/{id}(id=${item.id})}">Xóa</a>
+                </td>
+            </tr>
+        </table>
+        
+        <p><strong>Tổng số lượng: </strong><span th:text="${count}"></span></p>
+        <p><strong>Tổng tiền: </strong><span th:text="${#numbers.formatDecimal(amount, 0, 'COMMA', 0, 'POINT')} + ' đ'"></span></p>
+        
+        <p>
+            <a href="/cart/clear">Xóa tất cả</a>
+        </p>
+    </div>
+    
+    <div th:if="${count == 0}">
+        <p>Giỏ hàng trống!</p>
+    </div>
+    
+    <h3>Thêm sản phẩm vào giỏ:</h3>
+    <p><a href="/cart/add/1">iPhone 15 (25,000,000đ)</a></p>
+    <p><a href="/cart/add/2">Samsung Galaxy S24 (22,000,000đ)</a></p>
+    <p><a href="/cart/add/3">MacBook Pro (45,000,000đ)</a></p>
+    <p><a href="/cart/add/4">Dell XPS 13 (35,000,000đ)</a></p>
+    <p><a href="/cart/add/5">AirPods Pro (6,000,000đ)</a></p>
+</body>
+</html>
