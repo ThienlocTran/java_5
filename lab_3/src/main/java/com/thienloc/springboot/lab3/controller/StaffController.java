@@ -25,7 +25,7 @@ public class StaffController {
     public String list(Model model){
         List<Staff> list = List.of(
                 Staff.builder().id("user01@gmail.com").name("loc").level(0).build(),
-                Staff.builder().id("thanhtam@gmail.com").name("thanh").level(1).build(),
+                Staff.builder().id("thanhtam1@gmail.com").name("thanh").level(1).build(),
                 Staff.builder().id("thuyduong@gmail.com").name("thuy").level(2).build(),
                 Staff.builder().id("gon@gmail.com").name("gon").level(1).build(),
                 Staff.builder().id("thaibao@gmail.com").name("thai").level(2).build(),
@@ -33,5 +33,19 @@ public class StaffController {
         );
         model.addAttribute("list", list);
         return "staff-list";
+    }
+
+    @RequestMapping("staff/list/status")
+    public String listStatus(Model model){
+        List<Staff> list1 = List.of(
+                Staff.builder().id("user01@gmail.com").name("loc").level(0).build(),
+                Staff.builder().id("thanhtam@gmail.com").name("thanh").level(1).build(),
+                Staff.builder().id("thuyduong@gmail.com").name("thuy").level(2).build(),
+                Staff.builder().id("gon@gmail.com").name("gon").level(1).build(),
+                Staff.builder().id("thaibao@gmail.com").name("thai").level(2).build(),
+                Staff.builder().id("DiepLoc@gmail.com").name("diep").level(0).build()
+        );
+        model.addAttribute("list", list1);
+        return "staff-list-status";
     }
 }
