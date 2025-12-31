@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
     <style>
-        label{
+        .rdo-css{
             display: block;
             text-align: center;
             margin: 10px;
@@ -15,7 +15,7 @@
             width: 200px;
             color:blue;
         }
-        label:hover{
+        .rdo-css:hover{
              background-color: #ccc;
             cursor: pointer;
             color: red;
@@ -39,14 +39,16 @@
 </head>
 <body>
 <h3>Fill to SelectBox</h3>
-<select name="cbo" class="form-control">
-    <th:block th:each="staff : ${list}">
-        <option th:value="${staff.id}" th:text="${staff.name}"></option>
-    </th:block>
-</select>
+<label>
+    <select name="cbo" class="form-control">
+        <th:block th:each="staff : ${list}">
+            <option th:value="${staff.id}" th:text="${staff.name}"></option>
+        </th:block>
+    </select>
+</label>
 <h3>Create a Radio Button Group</h3>
 <th:block th:each="staff : ${list}" >
-    <label >
+    <label class="rdo-css">
         <input type="radio" name="rdo" th:value="${staff.id}">
          <th:block th:text="${staff.name}"></th:block>
     </label>
