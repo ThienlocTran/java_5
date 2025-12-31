@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.thienloc.springboot</groupId>
-    <artifactId>lab5</artifactId>
+    <artifactId>lab_5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>lab5</name>
     <description>lab5</description>
