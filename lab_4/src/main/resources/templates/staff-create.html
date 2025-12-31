@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
+    <style>
+        i{
+            color:red;
+        }
+    </style>
 </head>
 <body>
 <i th:text="${message}"></i>
@@ -14,33 +19,41 @@
     <label>
         Email:
         <input th:field="*{id}">
+        <i th:errors="*{id}"></i>
     </label>
     <hr>
     <label>
         Họ và tên:
         <input th:field="*{name}">
+        <i th:errors="*{name}"></i>
     </label>
     <hr>
     Giới tính:
-    <label>
-        <input type="radio" th:field="*{gender}" value="true">
-        Nam
-    </label>
-    <label>
-        <input type="radio" th:field="*{gender}" value="false">
-        Nữ
-    </label><hr>
+   <div>
+       <label>
+           <input type="radio" th:field="*{gender}" value="true">
+           Nam
+       </label>
+       <label>
+           <input type="radio" th:field="*{gender}" value="false">
+           Nữ
+       </label>
+       <i th:errors="*{gender}"></i>
+   </div><hr>
     <label>
         Ngày sinh:
         <input name="birthday"
 
                th:value="*{#dates.format(birthday, 'MM/dd/yyyy')}">
+        <i th:errors="*{birthday}"></i>
     </label>
     <hr>
 
     Hình ảnh:
     <input th:field="*{photo}" type="hidden">
-    <input name="photo_file" type="file"><hr>
+
+    <input name="photo_file" type="file" ><hr>
+
     <label>
         Cấp bậc:
         <select th:field="*{level}">
@@ -53,6 +66,7 @@
     <label>
         Salary:
         <input th:field="*{salary}">
+        <i th:errors="*{salary}"></i>
     </label>
     <hr>
     <button>Create</button>
