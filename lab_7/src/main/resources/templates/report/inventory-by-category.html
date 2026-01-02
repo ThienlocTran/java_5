@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inventory Report by Category</title>
+</head>
+<body>
+    <h3>BÁO CÁO TỒN KHO THEO DANH MỤC</h3>
+    
+    <div th:if="${items != null and not #lists.isEmpty(items)}">
+        <table border="1" style="width:100%">
+            <tr>
+                <th>Loại hàng</th>
+                <th>Tổng giá trị</th>
+                <th>Số sản phẩm</th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.group.name}"></td>
+                <td th:text="${#numbers.formatDecimal(item.sum, 0, 'COMMA', 2, 'POINT')} + ' VND'"></td>
+                <td th:text="${item.count}"></td>
+            </tr>
+        </table>
+        
+        <p><strong>Tổng số danh mục:</strong> <span th:text="${#lists.size(items)}"></span></p>
+    </div>
+    
+    <div th:if="${items == null or #lists.isEmpty(items)}">
+        <p>Không có dữ liệu báo cáo.</p>
+    </div>
+    
+    <hr>
+    
+    <p>
+        <a href="/product/page">Product Management</a> | 
+        <a href="/category/index">Category Management</a>
+    </p>
+</body>
+</html>
