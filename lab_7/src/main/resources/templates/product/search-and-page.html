@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search with Pagination</title>
+</head>
+<body>
+    <h3>PRODUCT SEARCH WITH PAGINATION</h3>
+    
+    <!-- Search Form -->
+    <form action="/product/search-and-page" method="get">
+        <div>
+            <label>Keywords:</label>
+            <input name="keywords" th:value="${param.keywords}" placeholder="Enter product name..." type="text">
+        </div>
+        <button type="submit">Search</button>
+        <a href="/product/search-and-page">Clear</a>
+    </form>
+    
+    <hr>
+    
+    <!-- Search Results with Pagination -->
+    <div th:if="${page != null}">
+        <h4>Search Results</h4>
+        <p><strong>Page:</strong> <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span></p>
+        <p><strong>Total Products:</strong> <span th:text="${page.totalElements}"></span></p>
+        <p><strong>Products per page:</strong> <span th:text="${page.size}"></span></p>
+        
+        <div th:if="${page.hasContent()}">
+            <table border="1" style="width:100%">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Create Date</th>
+                    <th>Available</th>
+                    <th>Category</th>
+                </tr>
+                <tr th:each="item: ${page.content}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${item.createDate}"></td>
+                    <td th:text="${item.available ? 'Yes' : 'No'}"></td>
+                    <td th:text="${item.category != null ? item.category.name : 'N/A'}"></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div th:if="${not page.hasContent()}">
+            <p>No products found matching your search criteria.</p>
+        </div>
+        
+        <!-- Pagination Controls -->
+        <div th:if="${page.totalPages > 1}">
+            <h4>Navigation:</h4>
+            
+            <!-- Previous Button -->
+            <span th:if="${page.hasPrevious()}">
+                <a th:href="@{/product/search-and-page(keywords=${param.keywords}, p=${page.number - 1})}">Previous</a>
+            </span>
+            <span th:if="${not page.hasPrevious()}">Previous</span>
+            
+            |
+            
+            <!-- Page Numbers -->
+            <span th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                <span th:if="${i == page.number}">
+                    <strong th:text="${i + 1}"></strong>
+                </span>
+                <span th:if="${i != page.number}">
+                    <a th:href="@{/product/search-and-page(keywords=${param.keywords}, p=${i})}" th:text="${i + 1}"></a>
+                </span>
+                <span th:if="${i < page.totalPages - 1}"> | </span>
+            </span>
+            
+            |
+            
+            <!-- Next Button -->
+            <span th:if="${page.hasNext()}">
+                <a th:href="@{/product/search-and-page(keywords=${param.keywords}, p=${page.number + 1})}">Next</a>
+            </span>
+            <span th:if="${not page.hasNext()}">Next</span>
+        </div>
+    </div>
+    
+    <div th:if="${page == null}">
+        <p>Enter keywords to search for products.</p>
+    </div>
+    
+    <hr>
+    
+    <p>
+        <a href="/product/search">Simple Search</a> | 
+        <a href="/product/page">Product Pagination</a> | 
+        <a href="/product/sort">Product Sorting</a> | 
+        <a href="/category/index">Back to Category Management</a>
+    </p>
+</body>
+</html>

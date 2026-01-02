@@ -2,5 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/lab_6/src/main/resources/static/J5Shop.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/lab_7/src/main/resources/static/J5Shop.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/lab_7/target/classes/static/J5Shop.sql" dialect="GenericSQL" />
   </component>
 </project>

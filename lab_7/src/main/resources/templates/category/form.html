@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Category Form</title>
+</head>
+<body>
+
+<div th:fragment="categoryForm">
+    <form th:object="${category}" method="post">
+        <div>
+            <label for="categoryId">Category ID:</label>
+            <input id="categoryId" th:field="*{id}" placeholder="Category Id?" />
+        </div>
+        <div>
+            <label for="categoryName">Category Name:</label>
+            <input id="categoryName" th:field="*{name}" placeholder="Category Name?" />
+        </div>
+        <hr>
+        <button type="submit" formaction="/category/create">Create</button>
+        <button type="submit" formaction="/category/update">Update</button>
+        <a th:href="@{'/category/delete/' + ${category.id}}" th:if="${category.id != null}">Delete</a>
+        <a href="/category/index">Reset</a>
+    </form>
+</div>
+
+</body>
+</html>
