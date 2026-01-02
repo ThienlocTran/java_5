@@ -1,6 +1,6 @@
 package com.thienloc.springboot.lab_6.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -8,9 +8,12 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class SessionService {
     
-    @Autowired
-    private HttpSession session;
-    
+    private final HttpSession session;
+
+    public SessionService(HttpSession session) {
+        this.session = session;
+    }
+
     /**
      * Lấy giá trị từ session
      * @param name tên attribute

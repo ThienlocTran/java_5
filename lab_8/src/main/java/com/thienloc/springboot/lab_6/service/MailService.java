@@ -59,4 +59,9 @@ public interface MailService {
             }
         }
     }
+    void push(Mail mail);
+    default void push(String to, String subject, String body){
+        this.push(Mail.builder().to(to).subject(subject).body(body).build());
+    }
+
 }

@@ -19,10 +19,10 @@ public class MailController {
     @RequestMapping("/mail/send")
     public String send() {
         try {
-            mailService.send("vinhnguyen125812@gmail.com", "Test Subject", "Test Body from WebShop");
-            return "✅ Mail đã được gửi thành công!";
+            mailService.push("vinhnguyen125812@gmail.com", "Test Subject", "Test Body from WebShop");
+            return "✅ Mail đã được xếp vào hàng đợi!";
         } catch (Exception e) {
-            return "❌ Lỗi gửi mail: " + e.getMessage();
+            return "❌ Lỗi xếp mail vào hàng đợi: " + e.getMessage();
         }
     }
     
@@ -37,11 +37,11 @@ public class MailController {
                           @RequestParam("subject") String subject,
                           @RequestParam("body") String body) {
         try {
-            mailService.send(to, subject, body);
-            model.addAttribute("result", "✅ Mail đã được gửi thành công đến: " + to);
+            mailService.push(to, subject, body);
+            model.addAttribute("result", "✅ Mail đã được xếp vào hàng đợi: " + to);
             model.addAttribute("success", true);
         } catch (Exception e) {
-            model.addAttribute("result", "❌ Lỗi gửi mail: " + e.getMessage());
+            model.addAttribute("result", "❌ Lỗi xếp mail vào hàng đợi: " + e.getMessage());
             model.addAttribute("success", false);
         }
         return "mail/test";

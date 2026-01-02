@@ -4,15 +4,22 @@ import jakarta.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service("mailService")
 public class MailServiceImpl implements MailService {
     final
     JavaMailSender mailSender;
-
+    List<Mail> queue = new ArrayList<>();
+    @Override
+    public void push(Mail mail){
+        queue.add(mail);
+    }
     public MailServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
@@ -99,5 +106,22 @@ public class MailServiceImpl implements MailService {
     private boolean isNullOrEmpty(String text) {
         return (text == null || text.trim().isEmpty());
     }
-}
+
+    @Scheduled(fixedDelay = 500)
+    public void run() {
+        if (!queue.isEmpty()) {
+            System.out.println("📧 Processing mail queue, size: " + queue.size());
+        }
+        while (!queue.isEmpty()) {
+            try {
+                Mail mail = queue.remove(0);
+                System.out.println("📤 Sending queued mail to: " + mail.getTo());
+                this.send(mail);
+                System.out.println("✅ Queued mail sent successfully!");
+            } catch (Exception e) {
+                System.err.println("❌ Failed to send queued mail: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }}
 
