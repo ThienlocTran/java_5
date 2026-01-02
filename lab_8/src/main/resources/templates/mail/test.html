@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test Mail Service</title>
+</head>
+<body>
+    <h3>TEST MAIL SERVICE</h3>
+    
+    <!-- Single Email Form -->
+    <h4>📧 Send to Single Email</h4>
+    <form action="/mail/test" method="post">
+        <div>
+            <label>To Email:</label><br>
+            <input name="to" type="email" placeholder="recipient@gmail.com" required style="width: 300px;">
+        </div>
+        <br>
+        <div>
+            <label>Subject:</label><br>
+            <input name="subject" placeholder="Test Subject" required style="width: 300px;">
+        </div>
+        <br>
+        <div>
+            <label>Body:</label><br>
+            <textarea name="body" placeholder="Test message content..." rows="3" style="width: 300px;"></textarea>
+        </div>
+        <br>
+        <button type="submit">Send Single Mail</button>
+    </form>
+    
+    <hr>
+    
+    <!-- Multiple Emails Form -->
+    <h4>📧 Send to Multiple Emails</h4>
+    <form action="/mail/test-multiple" method="post">
+        <div>
+            <label>Email List (separated by comma):</label><br>
+            <textarea name="emails" placeholder="email1@gmail.com, email2@gmail.com, email3@gmail.com" 
+                      rows="3" style="width: 300px;" required></textarea><br>
+            <small>Separate emails with commas</small>
+        </div>
+        <br>
+        <div>
+            <label>Send Method:</label><br>
+            <input type="radio" name="method" value="to" checked> TO (all see each other)<br>
+            <input type="radio" name="method" value="bcc"> BCC (private, don't see each other)<br>
+            <input type="radio" name="method" value="individual"> Individual (separate emails)
+        </div>
+        <br>
+        <div>
+            <label>Subject:</label><br>
+            <input name="subject" placeholder="Bulk Email Subject" required style="width: 300px;">
+        </div>
+        <br>
+        <div>
+            <label>Body:</label><br>
+            <textarea name="body" placeholder="Bulk message content..." rows="3" style="width: 300px;"></textarea>
+        </div>
+        <br>
+        <button type="submit">Send Bulk Mail</button>
+    </form>
+    
+    <hr>
+    
+    <!-- Result Display -->
+    <div th:if="${result}">
+        <h4>Result:</h4>
+        <p th:text="${result}" th:class="${success ? 'success' : 'error'}"></p>
+    </div>
+    
+    <style>
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+    
+    <hr>
+    
+    <h4>Quick Test Links:</h4>
+    <ul>
+        <li><a href="/mail/send">Send Hardcoded Mail</a></li>
+        <li><a href="/category/index">Back to Category Management</a></li>
+    </ul>
+</body>
+</html>
