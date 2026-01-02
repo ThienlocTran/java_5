@@ -19,7 +19,7 @@ public class MailController {
     @RequestMapping("/mail/send")
     public String send() {
         try {
-            mailService.push("vinhnguyen125812@gmail.com", "Test Subject", "Test Body from WebShop");
+            mailService.push("tranthienloc21102005.com", "Test Subject", "Test Body from WebShop");
             return "✅ Mail đã được xếp vào hàng đợi!";
         } catch (Exception e) {
             return "❌ Lỗi xếp mail vào hàng đợi: " + e.getMessage();
