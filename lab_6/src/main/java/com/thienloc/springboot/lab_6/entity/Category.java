@@ -16,14 +16,15 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category implements Serializable {
     @Id
     private String id;
     private String name;
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
-    List<Product> products;
+    private List<Product> products;
 
     @Override
     public final boolean equals(Object o) {
