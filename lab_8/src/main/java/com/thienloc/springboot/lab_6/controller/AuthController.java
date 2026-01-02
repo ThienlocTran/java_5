@@ -40,6 +40,11 @@ public class AuthController {
             model.addAttribute("message", "Account is not activated!");
         } else {
             session.setAttribute("user", user);
+            String securityUri = (String)session.getAttribute("securityUri");
+            if(securityUri != null) {
+                session.removeAttribute("securityUri"); // Clear the security URI
+                return "redirect:" + securityUri;
+            }
             return "redirect:/category/index"; // Redirect to home page after successful login
         }
 

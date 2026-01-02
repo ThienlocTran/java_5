@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Profile</title>
+</head>
+<body>
+<h2>Edit Profile</h2>
+<i th:text="${message}">Message</i>
+
+<form action="/account/edit-profile" method="post">
+    <label>Username:</label>
+    <input name="username" th:value="${account.username}" readonly>
+    <br><br>
+    
+    <label>Full Name:</label>
+    <input name="fullname" th:value="${account.fullname}">
+    <br><br>
+    
+    <label>Email:</label>
+    <input name="email" th:value="${account.email}">
+    <br><br>
+    
+    <button type="submit">Update Profile</button>
+</form>
+
+<a href="/auth/logout">Logout</a>
+</body>
+</html>

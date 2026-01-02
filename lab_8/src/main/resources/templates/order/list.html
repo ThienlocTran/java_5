@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order List</title>
+</head>
+<body>
+<h2>Order List</h2>
+<p>Welcome, <span th:text="${user.fullname}">User</span>!</p>
+
+<p>Your order list will be displayed here.</p>
+
+<a href="/account/edit-profile">Edit Profile</a> | 
+<a href="/auth/logout">Logout</a>
+</body>
+</html>
