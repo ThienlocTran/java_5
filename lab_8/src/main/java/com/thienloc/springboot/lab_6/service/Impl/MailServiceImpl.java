@@ -1,5 +1,6 @@
-package com.thienloc.springboot.lab_6.service;
+package com.thienloc.springboot.lab_6.service.Impl;
 
+import com.thienloc.springboot.lab_6.service.MailService;
 import jakarta.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;

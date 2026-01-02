@@ -20,15 +20,25 @@ public class AuthInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         HttpSession session = request.getSession();
         session.setAttribute("securityUri", uri);
+        
+        System.out.println("AuthInterceptor: Checking URI: " + uri);
+        
         Account user = (Account) session.getAttribute("user");
         if(user == null) { // chưa đăng nhập
+            System.out.println("AuthInterceptor: User not logged in, redirecting to login");
             response.sendRedirect("/auth/login");
             return false;
         }
+        
+        System.out.println("AuthInterceptor: User logged in: " + user.getUsername() + ", Admin: " + user.getAdmin());
+        
         if(uri.startsWith("/admin") && !user.getAdmin()) { // không phải admin
+            System.out.println("AuthInterceptor: User is not admin, access denied");
             response.sendRedirect("/auth/login");
             return false;
         }
+        
+        System.out.println("AuthInterceptor: Access granted");
         return true;
     }
 }
