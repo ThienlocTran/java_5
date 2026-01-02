@@ -24,9 +24,11 @@ public interface ProductDAO extends JpaRepository<Product, Integer>
     // Tìm kiếm theo khoảng giá
     List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
     
-    // Tìm kiếm theo từ khóa với phân trang
-    @Query("FROM Product p WHERE p.name LIKE ?1")
-    Page<Product> findByKeywords(String keywords, Pageable pageable);
+//    // Tìm kiếm theo từ khóa với phân trang
+//    @Query("FROM Product p WHERE p.name LIKE ?1")
+//    Page<Product> findByKeywords(String keywords, Pageable pageable);
+
+    Page<Product> findAllByNameLike(String keywords, Pageable pageable);
 
     // Tồn kho
     @Query("SELECT o.category AS group, sum(o.price) AS sum, count(o) AS count "

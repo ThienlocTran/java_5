@@ -77,7 +77,8 @@ public class ProductController {
         sessionService.set("keywords", kwords);
         
         Pageable pageable = PageRequest.of(p.orElse(0), 5);
-        Page<Product> page = dao.findByKeywords("%" + kwords + "%", pageable);
+//        Page<Product> page = dao.findByKeywords("%" + kwords + "%", pageable);
+        Page<Product> page = dao.findAllByNameLike("%" + kwords + "%" ,pageable);
         model.addAttribute("page", page);
         return "product/search-and-page";
     }
