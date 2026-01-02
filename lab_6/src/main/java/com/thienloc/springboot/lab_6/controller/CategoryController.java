@@ -29,7 +29,7 @@ public class CategoryController {
         model.addAttribute("category", category);
         List<Category> list = categoryDAO.findAll();
         model.addAttribute("list", list);
-        return "index";
+        return "category/index";
     }
 
     @RequestMapping("/category/edit/{id}")
@@ -39,7 +39,7 @@ public class CategoryController {
         model.addAttribute("category", category);
         List<Category> list = categoryDAO.findAll();
         model.addAttribute("list", list);
-        return "index";
+        return "category/index";
     }
 
     @PostMapping("/category/create")

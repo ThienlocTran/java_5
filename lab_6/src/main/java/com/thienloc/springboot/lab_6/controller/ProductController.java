@@ -3,6 +3,9 @@ package com.thienloc.springboot.lab_6.controller;
 import com.thienloc.springboot.lab_6.entity.Product;
 import com.thienloc.springboot.lab_6.repository.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +39,19 @@ public class ProductController {
             model.addAttribute("items", items);
             model.addAttribute("field", "ALL");
         }
-        return "sort";
+        return "product/sort";
+    }
+
+    @RequestMapping("/product/page")
+    public String paginate(Model model, @RequestParam("p") Optional<Integer> p) {
+        // Lấy số trang từ tham số p, mặc định là 0 nếu không có
+        int pageNumber = p.orElse(0);
+        
+        // Tạo Pageable với page number và size = 5
+        Pageable pageable = PageRequest.of(pageNumber, 5);
+        Page<Product> page = dao.findAll(pageable);
+        model.addAttribute("page", page);
+        
+        return "product/page";
     }
 }

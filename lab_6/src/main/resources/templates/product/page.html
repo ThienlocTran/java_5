@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Pagination</title>
+</head>
+<body>
+    <h3>PRODUCT PAGINATION</h3>
+    
+    <!-- Page Info -->
+    <div th:if="${page != null}">
+        <p><strong>Page:</strong> <span th:text="${page.number + 1}"></span> of <span th:text="${page.totalPages}"></span></p>
+        <p><strong>Total Products:</strong> <span th:text="${page.totalElements}"></span></p>
+        <p><strong>Products per page:</strong> <span th:text="${page.size}"></span></p>
+    </div>
+    
+    <hr>
+    
+    <!-- Products Table -->
+    <div th:if="${page != null and page.hasContent()}">
+        <table border="1" style="width:100%">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Create Date</th>
+                <th>Available</th>
+                <th>Category</th>
+            </tr>
+            <tr th:each="item: ${page.content}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${item.createDate}"></td>
+                <td th:text="${item.available ? 'Yes' : 'No'}"></td>
+                <td th:text="${item.category?.name ?: 'N/A'}"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div th:if="${page == null or !page.hasContent()}">
+        <p>No products found.</p>
+    </div>
+    
+    <hr>
+    
+    <!-- Pagination Controls -->
+    <div th:if="${page != null and page.totalPages > 1}">
+        <h4>Navigation:</h4>
+        
+        <!-- Previous Button -->
+        <span th:if="${page.hasPrevious()}">
+            <a th:href="@{/product/page(p=${page.number - 1})}">Previous</a>
+        </span>
+        <span th:if="${!page.hasPrevious()}">Previous</span>
+        
+        |
+        
+        <!-- Page Numbers -->
+        <span th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+            <span th:if="${i == page.number}">
+                <strong th:text="${i + 1}"></strong>
+            </span>
+            <span th:if="${i != page.number}">
+                <a th:href="@{/product/page(p=${i})}" th:text="${i + 1}"></a>
+            </span>
+            <span th:if="${i < page.totalPages - 1}"> | </span>
+        </span>
+        
+        |
+        
+        <!-- Next Button -->
+        <span th:if="${page.hasNext()}">
+            <a th:href="@{/product/page(p=${page.number + 1})}">Next</a>
+        </span>
+        <span th:if="${!page.hasNext()}">Next</span>
+    </div>
+    
+    <hr>
+    
+    <!-- Quick Page Jump -->
+    <div>
+        <h4>Go to Page:</h4>
+        <form action="/product/page" method="get">
+            <label>Page number:</label>
+            <input type="number" name="p" min="0" th:max="${page != null ? page.totalPages - 1 : 0}" 
+                   th:value="${page != null ? page.number : 0}">
+            <button type="submit">Go</button>
+        </form>
+    </div>
+    
+    <p><a href="/product/sort">Product Sorting</a> | <a href="/category/index">Back to Category Management</a></p>
+</body>
+</html>

@@ -13,17 +13,25 @@
 <body>
     <h3>CATEGORY MANAGEMENT</h3>
     
+    <!-- Navigation Links -->
+    <div>
+        <a href="/product/sort">Product Sorting</a> | 
+        <a href="/product/page">Product Pagination</a>
+    </div>
+    
+    <hr>
+    
     <!-- Flash Messages -->
     <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
     <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
     
     <!-- Include Form Fragment -->
-    <th:block th:replace="form :: categoryForm" />
+    <th:block th:replace="category/form :: categoryForm" />
     
     <hr>
     
     <!-- Include Table Fragment -->
-    <th:block th:replace="table :: categoryTable" />
+    <th:block th:replace="category/table :: categoryTable" />
     
 </body>
 </html>
