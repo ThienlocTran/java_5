@@ -3,16 +3,21 @@ package com.thienloc.springboot.lab5.service;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class CookieService {
-    @Autowired
+    final
     HttpServletRequest request;
-    @Autowired
+    final
     HttpServletResponse response;
-    
+
+    public CookieService(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        this.response = response;
+    }
+
     /**
      * Đọc cookie từ request
      * @param name tên cookie cần đọc

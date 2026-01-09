@@ -2,7 +2,7 @@ package com.thienloc.springboot.lab5.service;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,12 +12,17 @@ import java.util.Date;
 
 @Service
 public class ParamService {
-    @Autowired
+    final
     HttpServletRequest request;
     
-    @Autowired
+    final
     ServletContext app;
-    
+
+    public ParamService(HttpServletRequest request, ServletContext app) {
+        this.request = request;
+        this.app = app;
+    }
+
     /**
      * Đọc chuỗi giá trị của tham số
      * @param name tên tham số

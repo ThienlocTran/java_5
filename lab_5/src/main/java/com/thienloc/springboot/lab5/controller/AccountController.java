@@ -3,7 +3,7 @@ package com.thienloc.springboot.lab5.controller;
 import com.thienloc.springboot.lab5.service.CookieService;
 import com.thienloc.springboot.lab5.service.ParamService;
 import com.thienloc.springboot.lab5.service.SessionService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,18 @@ import java.io.File;
 
 @Controller
 public class AccountController {
-    @Autowired
+    final
     CookieService cookieService;
-    @Autowired
+    final
     ParamService paramService;
-    @Autowired
+    final
     SessionService sessionService;
+
+    public AccountController(CookieService cookieService, ParamService paramService, SessionService sessionService) {
+        this.cookieService = cookieService;
+        this.paramService = paramService;
+        this.sessionService = sessionService;
+    }
 
     @GetMapping("/account/login")
     public String login1(){
@@ -58,7 +64,7 @@ public class AccountController {
     @PostMapping("/account/register")
     public String register2(@RequestParam("photo") MultipartFile photo) {
         String username = paramService.getString("username", "");
-        String password = paramService.getString("password", "");
+      //  String password = paramService.getString("password", "");
         String email = paramService.getString("email", "");
         String fullname = paramService.getString("fullname", "");
         

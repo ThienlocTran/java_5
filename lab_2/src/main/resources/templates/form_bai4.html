@@ -7,8 +7,12 @@
 </head>
 <body>
     <form action="/product/save_bai4" method="post">
-        <input name="name" th:value="${product.name}">
-        <input name="price" th:value="${product.price}">
+        <label>
+            <input name="name" th:value="${product.name}">
+        </label>
+        <label>
+            <input name="price" th:value="${product.price}">
+        </label>
         <button>Save</button>
     </form>
     

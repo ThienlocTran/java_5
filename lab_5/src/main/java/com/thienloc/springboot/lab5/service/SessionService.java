@@ -1,14 +1,18 @@
 package com.thienloc.springboot.lab5.service;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class SessionService {
-    @Autowired
+    final
     HttpSession session;
-    
+
+    public SessionService(HttpSession session) {
+        this.session = session;
+    }
+
     /**
      * Đọc giá trị của attribute trong session
      * @param name tên attribute
